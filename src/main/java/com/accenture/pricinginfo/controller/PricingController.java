@@ -1,0 +1,41 @@
+package com.accenture.pricinginfo.controller;
+
+import com.accenture.pricinginfo.dto.PricingForProductResponse;
+import com.accenture.pricinginfo.dto.PricingInitializationResponse;
+import com.accenture.pricinginfo.dto.ValidatePricingRequest;
+import com.accenture.pricinginfo.dto.ValidatePricingResponse;
+import com.accenture.pricinginfo.repository.productMappingApi.dto.ProductIdResponse;
+import com.accenture.pricinginfo.service.PricingService;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+
+@RestController
+@RequestMapping("/ms-pricing-info")
+public class PricingController {
+
+    private final PricingService pricingService;
+
+    public PricingController(PricingService pricingService) {
+        this.pricingService = pricingService;
+    }
+
+    @PostMapping("/initializeDatabase")
+    public PricingInitializationResponse initializePricing() {
+        return this.pricingService.initializeDatabase();
+    }
+
+    @GetMapping("/getPricing/{productCode}")
+    public PricingForProductResponse getPricing(@PathVariable("productCode") String productCode) {
+        return pricingService.getPricing(productCode);
+    }
+
+    @PostMapping("/validatePricing")
+    public ValidatePricingResponse validatePricing(@Valid @RequestBody ValidatePricingRequest validatePricingRequest) {
+        return pricingService.validatePricing(
+                validatePricingRequest.getProductId(),
+                validatePricingRequest.getInterestRate(),
+                validatePricingRequest.getTerm());
+    }
+}
