@@ -4,12 +4,9 @@ import com.accenture.pricinginfo.dto.PricingForProductResponse;
 import com.accenture.pricinginfo.dto.PricingInitializationResponse;
 import com.accenture.pricinginfo.dto.ValidatePricingRequest;
 import com.accenture.pricinginfo.dto.ValidatePricingResponse;
-import com.accenture.pricinginfo.repository.productMappingApi.dto.ProductIdResponse;
 import com.accenture.pricinginfo.service.PricingService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
 
 @RestController
 @RequestMapping("/ms-pricing-info")

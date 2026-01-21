@@ -2,9 +2,9 @@ package com.accenture.pricinginfo.dto;
 
 public class ValidatePricingResponse {
 
-    boolean isValid;
+    private boolean isValid;
 
-    String notValidReason;
+    private String notValidReason;
 
     public ValidatePricingResponse(boolean isValid, String notValidReason) {
         this.isValid = isValid;

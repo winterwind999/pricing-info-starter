@@ -3,28 +3,31 @@ package com.accenture.pricinginfo.dto;
 import com.accenture.pricinginfo.enums.TermDuration;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
 public class PricingForProductResponse {
 
-    // pattern: ^(?!0(\.0*)?$)([0]\[1-9]\d{0,15})\.\d{1,16}$
+    @NotNull
     @Digits(integer = 15, fraction = 16)
-    @DecimalMin(value = "0.0", inclusive = false)
-    BigDecimal interestRate;
+    @DecimalMin(value = "0.1")
+    private BigDecimal interestRate;
 
-    // pattern: ^(?!0?0\.00$)([0]\[1-9]\d{0,15})\.\d{2}$
+    @NotNull
     @Digits(integer = 15, fraction = 2)
     @DecimalMin(value = "0.01")
-    BigDecimal minDepositAmount;
+    private BigDecimal minDepositAmount;
 
-    // pattern: ^(?!0?0\.00$)([0]\[1-9]\d{0,15})\.\d{2}$
+    @NotNull
     @Digits(integer = 15, fraction = 2)
     @DecimalMin(value = "0.01")
-    BigDecimal maxDepositAmount;
+    private BigDecimal maxDepositAmount;
 
     // enum: "3_MONTHS", "6_MONTHS", "9_MONTHS", "1_YEAR", "2_YEARS", "3_YEARS"
-    TermDuration minAllowedTerm;
+    @NotBlank
+    private TermDuration minAllowedTerm;
 
     public PricingForProductResponse(BigDecimal interestRate, BigDecimal minDepositAmount, BigDecimal maxDepositAmount, TermDuration minAllowedTerm) {
         this.interestRate = interestRate;

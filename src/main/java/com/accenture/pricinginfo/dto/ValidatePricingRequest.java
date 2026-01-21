@@ -3,19 +3,22 @@ package com.accenture.pricinginfo.dto;
 import com.accenture.pricinginfo.enums.TermDuration;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
 public class ValidatePricingRequest {
 
-    String productId;
+    private String productId;
 
-    // pattern: ^(?!0(\.0*)?$)([0]\[1-9]\d{0,15})\.\d{1,16}$
+    @NotNull
     @Digits(integer = 15, fraction = 16)
-    @DecimalMin(value = "0.0", inclusive = false)
-    BigDecimal interestRate;
+    @DecimalMin(value = "0.1")
+    private BigDecimal interestRate;
 
-    String term;
+    @NotBlank
+    private String term;
 
     public ValidatePricingRequest(String productId, BigDecimal interestRate, String term) {
         this.productId = productId;
